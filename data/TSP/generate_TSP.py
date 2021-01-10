@@ -15,10 +15,11 @@ if __name__ == "__main__":
     parser.add_argument("--filename", type=str, default=None)
     parser.add_argument("--node_dim", type=int, default=2)
     parser.add_argument("--seed", type=int, default=1234)
+    parser.add_argument("--split", type=str, default="train")
     opts = parser.parse_args()
     
     if opts.filename is None:
-        opts.filename = f"tsp{opts.min_nodes}-{opts.max_nodes}.txt"
+        opts.filename = f"tsp_{opts.split}.txt"
     
     # Pretty print the run args
     pp.pprint(vars(opts))
