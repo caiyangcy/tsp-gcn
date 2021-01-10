@@ -11,5 +11,5 @@ python data/TSP/generate_TSP.py --filename="data/TSP/tsp_test.txt" --split="test
 
 ## Run the classification
 ```
-python main_TSP_edge_classification.py --config="config/TSP_edge_classification_GatedGCN_100k.json"
+python main_TSP_edge_classification.py --config="config/TSP_edge_classification_GatedGCN_100k.json" --gpu_id=1
 ```
