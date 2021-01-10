@@ -12,7 +12,7 @@ class TSP(Dataset):
     def __init__(self, data_dir, split="train", num_neighbors=25, max_samples=10000):    
         self.data_dir = data_dir
         self.split = split
-        self.filename = f'{data_dir}/tsp50-500_{split}.txt'
+        self.filename = f'{data_dir}/tsp_{split}.txt'
         self.max_samples = max_samples
         self.num_neighbors = num_neighbors
         self.is_test = split.lower() in ['test', 'val']
@@ -109,8 +109,6 @@ class TSP(Dataset):
 
 class TSPDataset(Dataset):
     def __init__(self, name):
-        if not name.endswith('/'):
-            name += '/'
 
         # need to run generate_TSP first
         
@@ -132,10 +130,10 @@ class TSPDataset(Dataset):
 
     def _prepare(self):
         start = time.time()
-        print("[I] Loading dataset %s..." % (name))
-        name = 'datgaset'
-        data_dir = 'data/TSP/'
-        with open(data_dir+name+'.pkl',"rb") as f:
+        print("[I] Loading dataset")
+
+        filename = 'data/TSP/dataset.pkl'
+        with open(filename,"rb") as f:
             f = pickle.load(f)
             self.train = f[0]
             self.test = f[1]

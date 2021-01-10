@@ -27,6 +27,9 @@ from torch.utils.data import DataLoader
 from tensorboardX import SummaryWriter
 from tqdm import tqdm
 
+from data.TSP import TSPDataset
+
+
 class DotDict(dict):
     def __init__(self, **kwds):
         self.update(kwds)
@@ -302,7 +305,7 @@ def main():
         DATASET_NAME = args.dataset
     else:
         DATASET_NAME = config['dataset']
-    dataset = LoadData(DATASET_NAME)
+    dataset = TSPDataset('data/TSP/')
     if args.out_dir is not None:
         out_dir = args.out_dir
     else:
