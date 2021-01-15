@@ -111,14 +111,15 @@ class TSPDataset(Dataset):
     def __init__(self, name):
 
         # need to run generate_TSP first
+        self.name = 'TSP'
         
-        TSP_train_dataset = TSP(name, split="train", num_neighbors=20, max_samples=1000)
-        TSP_test_dataset = TSP(name, split="test", num_neighbors=20, max_samples=500)
-        TSP_val_dataset = TSP(name, split="val", num_neighbors=20, max_samples=500)
+        TSP_train_dataset = TSP(name, split="train", num_neighbors=15, max_samples=1000)
+        TSP_test_dataset = TSP(name, split="test", num_neighbors=15, max_samples=500)
+        TSP_val_dataset = TSP(name, split="val", num_neighbors=15, max_samples=500)
 
-        dataset = [list(TSP_train_dataset.graph_lists, TSP_train_dataset.edge_labels),
-                list(TSP_test_dataset.graph_lists, TSP_test_dataset.edge_labels),
-                list(TSP_val_dataset.graph_lists, TSP_val_dataset.edge_labels)]
+        dataset = [list(zip(TSP_train_dataset.graph_lists, TSP_train_dataset.edge_labels)),
+                list(zip(TSP_test_dataset.graph_lists, TSP_test_dataset.edge_labels)),
+                list(zip(TSP_val_dataset.graph_lists, TSP_val_dataset.edge_labels))]
         
         filename = 'data/TSP/dataset.pkl'
 
@@ -145,6 +146,7 @@ class TSPDataset(Dataset):
     # form a mini batch from a given list of samples = [(graph, label) pairs]
     def collate(self, samples):
         # The input samples is a list of pairs (graph, label).
+        
         graphs, labels = map(list, zip(*samples))
         # Edge classification labels need to be flattened to 1D lists
         labels = torch.LongTensor(np.array(list(itertools.chain(*labels))))
