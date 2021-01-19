@@ -1,6 +1,6 @@
 {
     "gpu": {
-        "use": true,
+        "use": false,
         "id": 3
     },
     
